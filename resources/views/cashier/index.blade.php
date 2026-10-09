@@ -20,7 +20,10 @@
             </div>
             <h1 class="text-2xl font-extrabold tracking-tight text-slate-800">CASHIER POS</h1>
         </div>
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-6">
+            <a href="/admin/tables" class="text-sm font-semibold text-slate-500 hover:text-orange-500 transition-colors">Quản lý Bàn</a>
+            <a href="/admin/reports" class="text-sm font-semibold text-slate-500 hover:text-orange-500 transition-colors">Báo Cáo</a>
+            <div class="h-6 w-px bg-slate-300"></div>
             <div class="text-right">
                 <p class="text-sm font-bold text-slate-800">Thu Ngân</p>
                 <p class="text-xs text-slate-500">Ca sáng</p>

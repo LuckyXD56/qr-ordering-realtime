@@ -47,7 +47,14 @@ class CashierController extends Controller
         
         // Reset table status
         $table->update(['status' => 'empty']);
+        $table->generateQrToken();
 
-        return back()->with('success', 'Đã thanh toán thành công Hóa đơn #' . $invoice->id);
+        return redirect()->route('cashier.invoice', $invoice->id)->with('success', 'Đã thanh toán thành công Hóa đơn #' . $invoice->id);
+    }
+
+    public function showInvoice(Invoice $invoice)
+    {
+        $invoice->load(['order.table', 'order.orderItems.product']);
+        return view('cashier.invoice', compact('invoice'));
     }
 }

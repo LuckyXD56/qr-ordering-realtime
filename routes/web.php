@@ -23,9 +23,14 @@ Route::prefix('admin')->group(function () {
     // Cashier Routes
     Route::get('cashier', [\App\Http\Controllers\CashierController::class, 'index'])->name('cashier.index');
     Route::post('cashier/{table}/checkout', [\App\Http\Controllers\CashierController::class, 'checkout'])->name('cashier.checkout');
+    Route::get('cashier/invoice/{invoice}', [\App\Http\Controllers\CashierController::class, 'showInvoice'])->name('cashier.invoice');
 
     Route::post('tables/{table}/generate-qr', [\App\Http\Controllers\Admin\TableController::class, 'generateQr'])->name('tables.generate-qr');
     Route::resource('tables', \App\Http\Controllers\Admin\TableController::class);
+    
+    // Reports Route
+    Route::get('reports', [\App\Http\Controllers\Admin\ReportController::class, 'index'])->name('reports.index');
+
     Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
 });

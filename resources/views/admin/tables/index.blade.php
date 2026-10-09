@@ -22,7 +22,9 @@
             <h1 class="text-2xl font-extrabold tracking-tight">QUẢN LÝ BÀN</h1>
         </div>
         <div class="flex items-center gap-4">
-            <a href="/admin/cashier" class="text-sm font-semibold text-slate-500 hover:text-slate-800 transition-colors">Về trang Thu Ngân</a>
+            <a href="/admin/reports" class="text-sm font-semibold text-slate-500 hover:text-orange-500 transition-colors">Báo Cáo Doanh Thu</a>
+            <div class="h-4 w-px bg-slate-300"></div>
+            <a href="/admin/cashier" class="text-sm font-semibold text-slate-500 hover:text-orange-500 transition-colors">Về trang Thu Ngân</a>
         </div>
     </header>
 
