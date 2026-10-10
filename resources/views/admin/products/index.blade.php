@@ -56,8 +56,17 @@
                         <tr class="hover:bg-slate-50 transition-colors">
                             <td class="p-4 font-medium text-slate-500">#{{ $product->id }}</td>
                             <td class="p-4">
-                                <p class="font-bold text-slate-800">{{ $product->name }}</p>
-                                <p class="text-xs text-slate-500 truncate max-w-xs">{{ $product->description }}</p>
+                                <div class="flex items-center gap-3">
+                                    @if($product->image)
+                                        <img src="{{ asset('storage/' . $product->image) }}" class="w-12 h-12 rounded-lg object-cover bg-slate-100 flex-shrink-0 border border-slate-200">
+                                    @else
+                                        <div class="w-12 h-12 rounded-lg bg-slate-100 flex items-center justify-center text-slate-300 flex-shrink-0"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>
+                                    @endif
+                                    <div>
+                                        <p class="font-bold text-slate-800">{{ $product->name }}</p>
+                                        <p class="text-xs text-slate-500 truncate max-w-[200px]">{{ $product->description }}</p>
+                                    </div>
+                                </div>
                             </td>
                             <td class="p-4 font-bold text-slate-600"><span class="bg-slate-100 px-2 py-1 rounded-lg text-xs">{{ $product->category->name }}</span></td>
                             <td class="p-4 font-bold text-orange-600">{{ number_format($product->price) }}đ</td>

@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+﻿
+import os
+
+content = """<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -307,4 +310,8 @@
         </div>
     </div>
 </body>
-</html>
+</html>"""
+
+with open("resources/views/menu/index.blade.php", "w", encoding="utf-8") as f:
+    f.write(content)
+

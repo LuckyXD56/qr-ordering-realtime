@@ -39,7 +39,7 @@
             </div>
             
             <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8">
-                <form action="{{ route('products.store') }}" method="POST" class="space-y-6">
+                <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf
                     
                     <div class="grid grid-cols-2 gap-6">
@@ -60,6 +60,11 @@
                                 <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                             @endforeach
                         </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Hình ảnh sản phẩm</label>
+                        <input type="file" name="image" accept="image/*" class="w-full border-2 border-slate-200 px-4 py-2.5 rounded-xl font-medium text-slate-800 bg-slate-50 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100">
                     </div>
 
                     <div>
