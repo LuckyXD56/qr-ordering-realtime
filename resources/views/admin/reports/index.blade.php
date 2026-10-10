@@ -25,9 +25,12 @@
             <a href="/admin/tables" class="text-sm font-semibold text-slate-500 hover:text-orange-500 transition-colors">Quản lý Bàn</a>
             <a href="/admin/cashier" class="text-sm font-semibold text-slate-500 hover:text-orange-500 transition-colors">Thu Ngân</a>
             <div class="h-6 w-px bg-slate-300"></div>
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600">A</div>
-                <span class="text-sm font-bold">Admin</span>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600">{{ auth()->check() ? strtoupper(substr(auth()->user()->name, 0, 1)) : "A" }}</div>
+                    <span class="text-sm font-bold">{{ auth()->check() ? auth()->user()->name : "Admin" }}</span>
+                </div>
+                <form action="{{ route('logout') }}" method="POST">@csrf <button type="submit" class="text-sm text-red-500 hover:text-red-700 font-bold transition-colors bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-lg flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>Thoát</button></form>
             </div>
         </nav>
     </header>

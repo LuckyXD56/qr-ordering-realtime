@@ -41,6 +41,7 @@ class MenuController extends Controller
                 'status' => 'active',
                 'total_amount' => 0,
             ]);
+            $table->update(['status' => 'active']);
         }
 
         $totalAmount = $order->total_amount;

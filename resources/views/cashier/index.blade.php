@@ -29,6 +29,7 @@
                 <p class="text-xs text-slate-500">Ca sáng</p>
             </div>
             <img src="https://ui-avatars.com/api/?name=Thu+Ngan&background=f97316&color=fff" class="w-10 h-10 rounded-full shadow-sm" alt="Avatar">
+            <form action="{{ route('logout') }}" method="POST" class="ml-2">@csrf <button type="submit" class="text-sm text-red-500 hover:text-red-700 font-bold transition-colors bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-lg flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>Thoát</button></form>
         </div>
     </header>
 
@@ -120,6 +121,12 @@
                 </template>
             </div>
 
+            <div class="px-6 py-4 border-b border-slate-100 bg-white" x-show="selectedTable && selectedTable.activeOrder">
+                <button @click="mergeModalOpen = true" class="w-full bg-white border-2 border-slate-200 text-slate-700 px-4 py-2 rounded-xl font-bold hover:bg-slate-50 hover:border-slate-300 transition-colors flex justify-center items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                    Gộp bàn này với bàn khác
+                </button>
+            </div>
             <div class="p-6 bg-slate-50 border-t border-slate-200" x-show="selectedTable && selectedTable.activeOrder">
                 
                 <div class="space-y-3 mb-6">
@@ -183,6 +190,7 @@
             return {
                 tables: tablesData,
                 selectedTable: null,
+                mergeModalOpen: false,
                 
                 selectTable(table) {
                     this.selectedTable = table;
@@ -194,5 +202,44 @@
             }
         }
     </script>
+
+    <!-- Gộp Bàn Modal -->
+    <div x-show="mergeModalOpen" 
+         x-transition.opacity.duration.300ms
+         class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm" 
+         style="display: none;">
+        
+        <div @click.away="mergeModalOpen = false" 
+             x-show="mergeModalOpen"
+             class="bg-white rounded-3xl p-8 max-w-sm w-full mx-4 relative shadow-2xl">
+            
+            <button @click="mergeModalOpen = false" class="absolute top-5 right-5 text-slate-400 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 rounded-full p-2 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <h2 class="text-2xl font-black text-slate-800 mb-6">Gộp Bàn</h2>
+            
+            <form action="/admin/cashier/merge" method="POST" class="space-y-4">
+                @csrf
+                <input type="hidden" name="source_table_id" :value="selectedTable?.id">
+                
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Chọn bàn muốn gộp vào (đích)</label>
+                    <select name="target_table_id" required class="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:outline-none focus:border-orange-500 font-medium text-slate-800 bg-white">
+                        <option value="" disabled selected>-- Chọn bàn --</option>
+                        <template x-for="t in tables" :key="t.id">
+                            <option x-show="t.id != selectedTable?.id && t.activeOrder" :value="t.id" x-text="t.name"></option>
+                        </template>
+                    </select>
+                </div>
+
+                <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2 mt-6">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                    Xác nhận Gộp
+                </button>
+            </form>
+        </div>
+    </div>
 </body>
+
 </html>
