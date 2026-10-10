@@ -43,10 +43,15 @@
                 <p class="text-sm text-slate-500 mt-1">Quản lý mã QR cho từng bàn để khách hàng có thể quét và gọi món.</p>
             </div>
             
-            <form action="{{ route('tables.store') }}" method="POST" class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+            <form action="{{ route('tables.store') }}" method="POST" class="flex flex-col sm:flex-row gap-3 w-full md:w-auto items-start">
                 @csrf
-                <input type="text" name="name" placeholder="Tên bàn mới (vd: Bàn 12)" required class="border-2 border-slate-200 rounded-xl px-4 py-3 w-full sm:w-64 focus:outline-none focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 transition-all font-medium text-slate-800 placeholder:text-slate-400">
-                <button type="submit" class="bg-slate-900 text-white px-6 py-3 rounded-xl font-bold hover:bg-slate-800 active:scale-[0.98] transition-all flex items-center justify-center gap-2 whitespace-nowrap">
+                <div class="w-full sm:w-64">
+                    <input type="text" name="name" placeholder="Tên bàn mới (vd: Bàn 12)" required class="border-2 border-slate-200 rounded-xl px-4 py-3 w-full focus:outline-none focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 transition-all font-medium text-slate-800 placeholder:text-slate-400">
+                    @error('name')
+                        <p class="text-red-500 text-xs font-semibold mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+                <button type="submit" class="bg-slate-900 text-white px-6 py-3 rounded-xl font-bold hover:bg-slate-800 active:scale-[0.98] transition-all flex items-center justify-center gap-2 whitespace-nowrap h-[52px]">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
                     Thêm Bàn
                 </button>

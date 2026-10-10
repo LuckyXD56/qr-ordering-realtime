@@ -17,7 +17,12 @@ class TableController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate(['name' => 'required|string|max:255']);
+        $request->validate([
+            'name' => 'required|string|max:255|unique:tables,name'
+        ], [
+            'name.unique' => 'Tên bàn này đã tồn tại, vui lòng chọn tên khác!',
+            'name.required' => 'Vui lòng nhập tên bàn.'
+        ]);
         Table::create([
             'name' => $request->name,
             'status' => 'empty',
