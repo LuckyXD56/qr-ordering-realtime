@@ -38,6 +38,16 @@
                 <h2 class="text-3xl font-black text-slate-800">Sửa món: {{ $product->name }}</h2>
             </div>
             
+            
+            @if($errors->any())
+                <div class="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-xl shadow-sm mb-6">
+                    <ul class="list-disc list-inside font-bold">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8">
                 <form action="{{ route('products.update', $product) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf @method('PUT')
@@ -45,11 +55,11 @@
                     <div class="grid grid-cols-2 gap-6">
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-2">Tên món ăn <span class="text-red-500">*</span></label>
-                            <input type="text" name="name" value="{{ $product->name }}" required class="w-full border-2 border-slate-200 px-4 py-3 rounded-xl focus:outline-none focus:border-orange-500 font-medium text-slate-800">
+                            <input type="text" name="name" value="{{ old('name', $product->name) }}" required class="w-full border-2 border-slate-200 px-4 py-3 rounded-xl focus:outline-none focus:border-orange-500 font-medium text-slate-800">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 mb-2">Giá tiền (VNĐ) <span class="text-red-500">*</span></label>
-                            <input type="number" name="price" value="{{ $product->price }}" required min="0" class="w-full border-2 border-slate-200 px-4 py-3 rounded-xl focus:outline-none focus:border-orange-500 font-bold text-orange-600">
+                            <input type="number" name="price" value="{{ old('price', $product->price) }}" required min="0" class="w-full border-2 border-slate-200 px-4 py-3 rounded-xl focus:outline-none focus:border-orange-500 font-bold text-orange-600">
                         </div>
                     </div>
 
@@ -74,7 +84,7 @@
 
                     <div>
                         <label class="block text-sm font-bold text-slate-700 mb-2">Mô tả (Tùy chọn)</label>
-                        <textarea name="description" rows="3" class="w-full border-2 border-slate-200 px-4 py-3 rounded-xl focus:outline-none focus:border-orange-500 font-medium text-slate-800">{{ $product->description }}</textarea>
+                        <textarea name="description" rows="3" class="w-full border-2 border-slate-200 px-4 py-3 rounded-xl focus:outline-none focus:border-orange-500 font-medium text-slate-800">{{ old('description', $product->description) }}</textarea>
                     </div>
 
                     <div class="flex items-center gap-3">
