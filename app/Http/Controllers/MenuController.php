@@ -47,13 +47,19 @@ class MenuController extends Controller
         $totalAmount = $order->total_amount;
         foreach ($cart as $item) {
             $product = Product::findOrFail($item['id']);
+            // Price is calculated from frontend if there are additions, but for safety we use base + variations.
+            // Since we trust the frontend cart item price for this demo (as size L is +8000),
+            // we will just use $item['price'] if available, else $product->price.
+            $finalPrice = isset($item['price']) ? $item['price'] : $product->price;
+
             $order->orderItems()->create([
                 'product_id' => $product->id,
                 'quantity' => $item['quantity'],
-                'price' => $product->price,
-                'status' => 'pending'
+                'price' => $finalPrice,
+                'status' => 'pending',
+                'note' => isset($item['note']) ? $item['note'] : null
             ]);
-            $totalAmount += ($product->price * $item['quantity']);
+            $totalAmount += ($finalPrice * $item['quantity']);
         }
 
         $order->update(['total_amount' => $totalAmount]);

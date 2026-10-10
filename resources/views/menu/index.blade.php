@@ -126,22 +126,7 @@
                                     <span class="font-bold text-orange-500 text-lg"><span x-text="formatCurrency({{ $product->price }})"></span></span>
                                     
                                     <!-- Add button logic -->
-                                    <div class="flex items-center gap-2">
-                                        <template x-if="cart.find(i => i.id === {{ $product->id }})">
-                                            <div class="flex items-center gap-2 bg-slate-100 rounded-full p-1">
-                                                <button @click="removeFromCart({{ $product->id }})" class="w-7 h-7 flex items-center justify-center bg-white rounded-full shadow-sm text-slate-600 font-bold">-</button>
-                                                <span class="w-4 text-center text-sm font-bold" x-text="cart.find(i => i.id === {{ $product->id }}).quantity"></span>
-                                                <button @click="addToCart({{ $product->id }}, '{{ addslashes($product->name) }}', {{ $product->price }})" class="w-7 h-7 flex items-center justify-center bg-orange-500 rounded-full shadow-sm text-white font-bold">+</button>
-                                            </div>
-                                        </template>
-                                        <template x-if="!cart.find(i => i.id === {{ $product->id }})">
-                                            <button 
-                                                @click="addToCart({{ $product->id }}, '{{ addslashes($product->name) }}', {{ $product->price }})"
-                                                class="bg-orange-100 text-orange-600 hover:bg-orange-200 w-9 h-9 rounded-full flex items-center justify-center font-bold text-xl transition-colors">
-                                                +
-                                            </button>
-                                        </template>
-                                    </div>
+                                    <button @click="openOptionModal({{ $product->id }}, '{{ addslashes($product->name) }}', {{ $product->price }})" class="bg-orange-100 text-orange-600 hover:bg-orange-200 px-4 py-1.5 rounded-full font-bold text-sm transition-colors">Chọn</button>
                                 </div>
                             </div>
                         </div>
@@ -181,5 +166,3 @@
         </div>
     </div>
 
-</body>
-</html>

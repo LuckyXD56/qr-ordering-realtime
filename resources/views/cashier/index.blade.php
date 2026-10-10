@@ -113,6 +113,9 @@
                                 <div class="pr-4">
                                     <span class="font-bold text-slate-800 text-lg" x-text="item.product.name"></span>
                                     <div class="text-sm font-medium text-slate-500 mt-0.5" x-text="formatCurrency(item.price) + ' x ' + item.quantity"></div>
+                                    <template x-if="item.note">
+                                        <div class="text-xs text-orange-600 font-bold mt-1 bg-orange-50 px-2 py-1 rounded w-fit" x-text="item.note"></div>
+                                    </template>
                                 </div>
                                 <span class="font-bold text-slate-800 text-lg whitespace-nowrap" x-text="formatCurrency(item.price * item.quantity)"></span>
                             </div>

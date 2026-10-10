@@ -56,7 +56,12 @@
                                 <template x-for="item in order.order_items" :key="item.id">
                                     <li class="flex items-start gap-3 text-slate-700 font-medium">
                                         <span class="bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded text-sm" x-text="item.quantity + 'x'"></span>
-                                        <span class="leading-tight pt-0.5" x-text="item.product.name"></span>
+                                        <div class="flex flex-col pt-0.5">
+                                            <span class="leading-tight" x-text="item.product.name"></span>
+                                            <template x-if="item.note">
+                                                <span class="text-xs text-orange-600 mt-0.5 font-bold" x-text="item.note"></span>
+                                            </template>
+                                        </div>
                                     </li>
                                 </template>
                             </ul>
@@ -86,7 +91,12 @@
                                 <template x-for="item in order.order_items" :key="item.id">
                                     <li class="flex items-start gap-3 text-slate-700 font-medium">
                                         <span class="bg-orange-100 text-orange-700 font-bold px-2 py-0.5 rounded text-sm" x-text="item.quantity + 'x'"></span>
-                                        <span class="leading-tight pt-0.5" x-text="item.product.name"></span>
+                                        <div class="flex flex-col pt-0.5">
+                                            <span class="leading-tight" x-text="item.product.name"></span>
+                                            <template x-if="item.note">
+                                                <span class="text-xs text-orange-600 mt-0.5 font-bold" x-text="item.note"></span>
+                                            </template>
+                                        </div>
                                     </li>
                                 </template>
                             </ul>
