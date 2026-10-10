@@ -32,6 +32,25 @@
                 </span>
                 <span class="text-sm font-semibold text-emerald-400">Live Sync</span>
             </div>
+            
+            <div class="h-8 w-px bg-slate-700 mx-2"></div>
+            
+            <div class="flex items-center gap-2">
+                <div class="w-9 h-9 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center font-bold text-white shadow-inner">
+                    {{ auth()->check() ? strtoupper(substr(auth()->user()->name, 0, 1)) : "B" }}
+                </div>
+                <div class="flex flex-col mr-2">
+                    <span class="text-sm font-bold text-white leading-tight">{{ auth()->check() ? auth()->user()->name : "Bếp Chính" }}</span>
+                    <span class="text-xs text-slate-400 font-medium leading-tight">Đang hoạt động</span>
+                </div>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="text-sm text-red-400 hover:text-red-300 font-bold transition-colors bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-lg flex items-center gap-1 border border-slate-700">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                        Thoát
+                    </button>
+                </form>
+            </div>
         </div>
     </header>
 
